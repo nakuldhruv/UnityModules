@@ -1,12 +1,15 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ScrollViewOptimizeItemView : MonoBehaviour
+namespace UnityModules
 {
-    public Text NameText;
-
-    public void Refresh(string name)
+    public class ScrollViewOptimizeItemView : MonoBehaviour
     {
-        this.NameText.text = name;
+        public Text NameText;
+
+        public void Refresh(string name)
+        {
+            this.NameText.text = name;
+        }
     }
 }

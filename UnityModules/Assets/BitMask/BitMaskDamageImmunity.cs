@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bit
+namespace UnityModules
 {
     /// <summary>
     /// 伤害类型（位掩码枚举）
