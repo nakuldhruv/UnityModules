@@ -1,31 +1,34 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ObjectPool<T> where T : MonoBehaviour
+namespace UnityModules
 {
-    public T InstancePrefab;
-
-    public ObjectPool(T instancePrefab) => InstancePrefab = instancePrefab;
-
-    private Stack<T> m_Pool = new Stack<T>();
-
-    public T Alloc()
+    public class ObjectPool<T> where T : MonoBehaviour
     {
-        T instance;
-        if (m_Pool.Count > 0)
+        public T InstancePrefab;
+
+        public ObjectPool(T instancePrefab) => InstancePrefab = instancePrefab;
+
+        private Stack<T> m_Pool = new Stack<T>();
+
+        public T Alloc()
         {
-            instance = m_Pool.Pop();
-            instance.gameObject.SetActive(true);
+            T instance;
+            if (m_Pool.Count > 0)
+            {
+                instance = m_Pool.Pop();
+                instance.gameObject.SetActive(true);
+            }
+            else
+                instance = GameObject.Instantiate(InstancePrefab);
+
+            return instance;
         }
-        else
-            instance = GameObject.Instantiate(InstancePrefab);
 
-        return instance;
-    }
-
-    public void Release(T instance)
-    {
-        instance.gameObject.SetActive(false);
-        m_Pool.Push(instance);
+        public void Release(T instance)
+        {
+            instance.gameObject.SetActive(false);
+            m_Pool.Push(instance);
+        }
     }
 }

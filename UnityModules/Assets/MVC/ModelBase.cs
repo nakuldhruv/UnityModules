@@ -2,7 +2,7 @@
 using System.Text;
 using UnityEngine;
 
-namespace MVC
+namespace UnityModules
 {
     public abstract class ModelBase 
     {

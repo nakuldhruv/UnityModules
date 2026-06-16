@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Bit
+namespace UnityModules
 {
     /// <summary>
     /// 基于位掩码的每日签到系统（支持最多 32 天）
