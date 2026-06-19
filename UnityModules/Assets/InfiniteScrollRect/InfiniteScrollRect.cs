@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace UnityModules
 {
-    public class ScrollViewOptimize : ScrollRect
+    public class InfiniteScrollRect : ScrollRect
     {
         private IBehaviourHandler m_Handler;
         private RectTransform m_Dummy;

@@ -3,26 +3,26 @@ using UnityEngine;
 
 namespace UnityModules
 {
-    public class ScrollViewOptimizeExampleView : MonoBehaviour, ScrollViewOptimize.IBehaviourHandler
+    public class InfiniteScrollRectExampleView : MonoBehaviour, InfiniteScrollRect.IBehaviourHandler
     {
-        [SerializeField] private ScrollViewOptimize m_ScrollViewOptimize;
-        [SerializeField] private ScrollViewOptimizeItemView m_InstancePrefab;
+        [SerializeField] private InfiniteScrollRect m_InfiniteScrollRect;
+        [SerializeField] private InfiniteScrollRectItemView m_InstancePrefab;
         [SerializeField] private RectTransform m_DummyPrefab;
 
-        private ObjectPool<ScrollViewOptimizeItemView> m_ObjectPool;
+        private ObjectPool<InfiniteScrollRectItemView> m_ObjectPool;
         private ScrollViewOptimizeData m_Data;
 
         private void Awake()
         {
             m_Data = new ScrollViewOptimizeData();
-            m_ObjectPool = new ObjectPool<ScrollViewOptimizeItemView>(m_InstancePrefab);
-            m_ScrollViewOptimize.Initialize(this, m_DummyPrefab);
-            m_ScrollViewOptimize.OnUpdate();
+            m_ObjectPool = new ObjectPool<InfiniteScrollRectItemView>(m_InstancePrefab);
+            m_InfiniteScrollRect.Initialize(this, m_DummyPrefab);
+            m_InfiniteScrollRect.OnUpdate();
         }
 
         public void OnUpdate(int idx, RectTransform rect)
         {
-            rect.GetComponent<ScrollViewOptimizeItemView>().Refresh(m_Data.DataList[idx]);
+            rect.GetComponent<InfiniteScrollRectItemView>().Refresh(m_Data.DataList[idx]);
         }
 
         public RectTransform Alloc(int index)
@@ -32,7 +32,7 @@ namespace UnityModules
 
         public void Free(RectTransform rect)
         {
-            m_ObjectPool.Release(rect.GetComponent<ScrollViewOptimizeItemView>());
+            m_ObjectPool.Release(rect.GetComponent<InfiniteScrollRectItemView>());
         }
 
         public int Count => m_Data.DataList.Count;

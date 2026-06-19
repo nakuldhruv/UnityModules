@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace UnityModules
 {
-    public class ScrollViewOptimizeItemView : MonoBehaviour
+    public class InfiniteScrollRectItemView : MonoBehaviour
     {
         public Text NameText;
 
