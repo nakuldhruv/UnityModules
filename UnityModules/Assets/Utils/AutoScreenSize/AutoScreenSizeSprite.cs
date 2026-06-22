@@ -2,7 +2,7 @@
 
 namespace UnityModules
 {
-    public class PerspectiveSpriteScaler : MonoBehaviour
+    public class AutoScreenSizeSprite : MonoBehaviour
     {
         [SerializeField] private Camera         _targetCamera;
         [SerializeField] private float          _distanceFromCamera = 20f;
@@ -38,8 +38,8 @@ namespace UnityModules
             // 公式：cameraHeight = 2 * D * Tan(FOV / 2)
             // 推导：半高 / D = Tan(半角)  =>  全高 = 2 * D * Tan(半角)
             // 注意：Mathf.Tan 需要弧度，所以要把角度乘以 Mathf.Deg2Rad 转弧度。
-            float halfFovRad   = _targetCamera.fieldOfView * 0.5f                 * Mathf.Deg2Rad;
-            float cameraHeight = 2.0f                       * _distanceFromCamera * Mathf.Tan(halfFovRad);
+            float halfFovRad   = _targetCamera.fieldOfView * 0.5f                * Mathf.Deg2Rad;
+            float cameraHeight = 2.0f                      * _distanceFromCamera * Mathf.Tan(halfFovRad);
 
             // ========== 第 4 步：计算“D距离处”视锥截面的水平宽度 ==========
             // 直觉：屏幕是个矩形，宽度 = 高度 * (屏幕宽 / 屏幕高)
