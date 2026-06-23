@@ -2,7 +2,7 @@
 using System.Text;
 using UnityEngine;
 
-namespace UnityModules
+namespace UnityModules.Zxs.Model
 {
     public abstract class ModelBase 
     {
