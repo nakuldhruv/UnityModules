@@ -1,11 +1,11 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace UnityModules
+namespace UnityModules.Editor
 {
     [CustomEditor(typeof(CharacterData))]
     [CanEditMultipleObjects]
-    public class CharacterDataEditor : Editor
+    public class CharacterDataEditor : UnityEditor.Editor
     {
         private SerializedProperty _nameProp;
         private SerializedProperty _healthProp;
