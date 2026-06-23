@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UnityModules
+namespace UnityModules.Editor
 {
     public class ClampedRangeAttribute : PropertyAttribute
     {
