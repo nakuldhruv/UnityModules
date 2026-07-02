@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace UnityModules.Zxs.Event
+namespace UnityModules.Event.Zxs
 {
     public class SignalBus
     {

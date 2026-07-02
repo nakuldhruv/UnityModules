@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 
-namespace UnityModules.Zxs.Event
+namespace UnityModules.Event.Zxs
 {
     public record PlayerDiedEvent; // 玩家死亡
     public record PlayerBornEvent; // 玩家出生
     public record PlayerWinEvent;  // 玩家胜利
     public record PlayerLoseEvent; // 玩家失败
     
-    public class SignalBusTest : MonoBehaviour
+    public class SignalBusExample : MonoBehaviour
     {
         private SignalBus _bus = new();
         private SignalSubscription _loseSubscription;

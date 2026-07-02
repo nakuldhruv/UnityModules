@@ -1,0 +1,26 @@
+{
+  "items": [
+    {
+      "key": "first_guide",
+      "steps": [
+        {
+          "key": "first_guide_step1",
+          "type": 1
+        }
+      ]
+    },
+    {
+      "key": "second_guide",
+      "steps": [
+        {
+          "key": "second_guide_step1",
+          "type": 1
+        },
+        {
+          "key": "second_guide_step2",
+          "type": 1
+        }
+      ]
+    }
+  ]
+}
