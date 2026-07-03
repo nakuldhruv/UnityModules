@@ -1,4 +1,4 @@
-namespace UnityModules.Guide
+namespace UnityModules.Zxs.Guide
 {
     public class GuideDialogView
     {

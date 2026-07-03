@@ -1,9 +1,8 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityModules.Event.Zxs;
+using UnityModules.Zxs.Event;
 
-namespace UnityModules.Guide
+namespace UnityModules.Zxs.Guide
 {
     public class StartGuide
     {

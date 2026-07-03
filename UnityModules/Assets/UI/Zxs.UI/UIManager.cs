@@ -6,7 +6,7 @@ namespace UnityModules.Zxs.UI
 {
     public interface IUIViewOwner
     {
-        void HideView(UIView instance);
+        void HideView(ViewBase instance);
         void PopPopup();
     }
     
@@ -19,8 +19,8 @@ namespace UnityModules.Zxs.UI
         [SerializeField] private Transform _middleRoot;
         [SerializeField] private Transform _bottomRoot;
 
-        private List<UIView> _activeViews = new();
-        private List<UIView> _popupStack  = new();
+        private List<ViewBase> _activeViews = new();
+        private List<ViewBase> _popupStack  = new();
 
         private void Awake()
         {
@@ -34,16 +34,16 @@ namespace UnityModules.Zxs.UI
             DontDestroyOnLoad(this.gameObject);
         }
 
-        public void ShowView(UIView prefab, UIViewLayer layer)
+        public void ShowView(ViewBase prefab, UIViewLayer layer)
         {
             if (prefab == null) return;
-            UIView instance = Instantiate(prefab, GetParent(layer));
+            ViewBase instance = Instantiate(prefab, GetParent(layer));
             instance.Owner = this;
             instance.OnShow();
             _activeViews.Add(instance);
         }
 
-        public void HideView(UIView instance)
+        public void HideView(ViewBase instance)
         {
             if (instance == null) return;
             if (_activeViews.Contains(instance))
@@ -54,10 +54,10 @@ namespace UnityModules.Zxs.UI
             }
         }
 
-        public void PushPopup(UIView prefab, UIViewLayer layer)
+        public void PushPopup(ViewBase prefab, UIViewLayer layer)
         {
             if (prefab == null) return;
-            UIView instance = Instantiate(prefab, GetParent(layer));
+            ViewBase instance = Instantiate(prefab, GetParent(layer));
             instance.Owner = this;
             instance.OnShow();
             _popupStack.Add(instance);
@@ -67,7 +67,7 @@ namespace UnityModules.Zxs.UI
         {
             if (_popupStack.Count == 0) return;
             int    index    = _popupStack.Count - 1;
-            UIView instance = _popupStack[index];
+            ViewBase instance = _popupStack[index];
             _popupStack.RemoveAt(index);
             instance.OnHide();
             Destroy(instance.gameObject);

@@ -1,4 +1,4 @@
-namespace UnityModules.Event.Zxs
+namespace UnityModules.Zxs.Event
 {
     public class GameSignalBus : SignalBus
     {

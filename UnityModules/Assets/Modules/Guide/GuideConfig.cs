@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace UnityModules.Guide
+namespace UnityModules.Zxs.Guide
 {
     [Serializable]
     public class GuideConfig

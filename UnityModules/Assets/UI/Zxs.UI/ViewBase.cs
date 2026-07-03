@@ -4,7 +4,7 @@ namespace UnityModules.Zxs.UI
 {
     [RequireComponent(typeof(CanvasGroup))]
     [RequireComponent(typeof(RectTransform))]
-    public class UIView : MonoBehaviour
+    public class ViewBase : MonoBehaviour
     {
         public CanvasGroup   canvasGroup;
         public RectTransform rectTransform;
