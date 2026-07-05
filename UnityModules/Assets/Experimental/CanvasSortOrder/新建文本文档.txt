@@ -1,6 +1,0 @@
-第一优先级（跨 Canvas 全局）：Sort Order or Order in Layer
-第二优先级（同 Canvas 内部）：Hierarchy 窗口中的上下顺序
-第三优先级（特殊渲染模式）：摄像机 Depth（深度）
-
-Inspector 顶部的 Layer “物理层”
-负责：摄像机剔除（Culling Mask）物理碰撞（Physics Collision）射线检测（Raycast）

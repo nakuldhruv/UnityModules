@@ -1,94 +1,91 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityModules;
 
 namespace Zxs.UI
 {
-    public interface IUIViewOwner
+    public interface IViewCloser
     {
-        void HideView(ViewBase instance);
-        void PopPopup();
+        void CloseView(ViewBase instance);
     }
-    
-    public class UIManager : MonoBehaviour, IUIViewOwner
+
+    public class UIManager : SingletonMono<UIManager>, IViewCloser
     {
-        private static UIManager _instance;
-        public static  UIManager Instance => _instance;
+        [SerializeField] private Transform _backgroundLayer;
+        [SerializeField] private Transform _normalLayer;
+        [SerializeField] private Transform _popupLayer;
+        [SerializeField] private Transform _guideLayer;
+        [SerializeField] private Transform _topmostLayer;
 
-        [SerializeField] private Transform _topRoot;
-        [SerializeField] private Transform _middleRoot;
-        [SerializeField] private Transform _bottomRoot;
+        private readonly List<ViewBase> _activeViews = new();
+        private readonly List<ViewBase> _popupStack = new();
 
-        private List<ViewBase> _activeViews = new();
-        private List<ViewBase> _popupStack  = new();
-
-        private void Awake()
-        {
-            if (_instance != null && _instance != this)
-            {
-                Destroy(this.gameObject);
-                return;
-            }
-
-            _instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-
-        public void ShowView(ViewBase prefab, UIViewLayer layer)
+        public void ShowView(ViewBase prefab, ViewLayer layer, object args = null)
         {
             if (prefab == null) return;
-            ViewBase instance = Instantiate(prefab, GetParent(layer));
-            instance.Owner = this;
-            instance.OnShow();
+            ViewBase instance = Instantiate(prefab, GetLayer(layer));
+            instance.Initialize(this, false, args);
+            instance.Show();
             _activeViews.Add(instance);
         }
-
+        
         public void HideView(ViewBase instance)
         {
             if (instance == null) return;
             if (_activeViews.Contains(instance))
             {
-                instance.OnHide();
                 _activeViews.Remove(instance);
                 Destroy(instance.gameObject);
             }
         }
 
-        public void PushPopup(ViewBase prefab, UIViewLayer layer)
+        public void PushPopup(ViewBase prefab, ViewLayer layer, object args = null)
         {
             if (prefab == null) return;
-            ViewBase instance = Instantiate(prefab, GetParent(layer));
-            instance.Owner = this;
-            instance.OnShow();
+            ViewBase instance = Instantiate(prefab, GetLayer(layer));
+            instance.Initialize(this, true, args);
+            instance.Show();
             _popupStack.Add(instance);
         }
 
         public void PopPopup()
         {
             if (_popupStack.Count == 0) return;
-            int    index    = _popupStack.Count - 1;
+            int index = _popupStack.Count - 1;
             ViewBase instance = _popupStack[index];
             _popupStack.RemoveAt(index);
-            instance.OnHide();
             Destroy(instance.gameObject);
         }
+        
+        public void CloseView(ViewBase instance)
+        {
+            if(instance.IsPopup)
+                PopPopup();
+            else
+                HideView(instance);
+        }
 
-        private Transform GetParent(UIViewLayer layer)
+        private Transform GetLayer(ViewLayer layer)
         {
             return layer switch
             {
-                UIViewLayer.Bottom => _bottomRoot,
-                UIViewLayer.Middle => _middleRoot,
-                UIViewLayer.Top    => _topRoot,
-                _                  => throw new ArgumentOutOfRangeException(nameof(layer), layer, null)
+                ViewLayer.Background => _backgroundLayer,
+                ViewLayer.Normal => _normalLayer,
+                ViewLayer.Popup => _popupLayer,
+                ViewLayer.Guide => _guideLayer,
+                ViewLayer.Topmost => _topmostLayer,
+                _ => throw new ArgumentOutOfRangeException(nameof(layer), layer, null)
             };
         }
     }
 
-    public enum UIViewLayer
+    public enum ViewLayer
     {
-        Bottom,
-        Middle,
-        Top
+        Background = 0,
+        Normal = 20,
+        Popup = 30,
+        Guide = 60,
+        Topmost = 100
     }
 }

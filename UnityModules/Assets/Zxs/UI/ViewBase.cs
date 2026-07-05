@@ -6,14 +6,50 @@ namespace Zxs.UI
     [RequireComponent(typeof(RectTransform))]
     public class ViewBase : MonoBehaviour
     {
-        public CanvasGroup   canvasGroup;
-        public RectTransform rectTransform;
-        public IUIViewOwner  Owner;
+        public bool IsPopup { get; private set; }
+        protected CanvasGroup CanvasGroup { get; private set; }
+        protected RectTransform RectTransform { get; private set; }
+        private object _args;
+        private IViewCloser _closer;
 
         public virtual void Awake()
         {
-            canvasGroup = GetComponent<CanvasGroup>();
-            rectTransform = GetComponent<RectTransform>();
+            CanvasGroup = GetComponent<CanvasGroup>();
+            RectTransform = GetComponent<RectTransform>();
+        }
+
+        public void Initialize(IViewCloser closer, bool isPopup, object args)
+        {
+            _closer = closer;
+            IsPopup = isPopup;
+            _args = args;
+            OnCreate();
+        }
+
+        public virtual void OnCreate()
+        {
+        }
+
+        public void Show()
+        {
+            CanvasGroup.alpha = 1;
+            CanvasGroup.interactable = true;
+            CanvasGroup.blocksRaycasts = true;
+            OnShow();
+        }
+
+        public void Hide()
+        {
+            CanvasGroup.alpha = 0;
+            CanvasGroup.interactable = false;
+            CanvasGroup.blocksRaycasts = false;
+            OnHide();
+        }
+
+        public void Close()
+        {
+            OnClose();
+            _closer.CloseView(this);
         }
 
         public virtual void OnShow()
@@ -24,14 +60,13 @@ namespace Zxs.UI
         {
         }
 
-        public void HideView()
+        public virtual void OnClose()
         {
-            Owner.HideView(this);
         }
 
-        public void PopPopup()
+        protected T GetArgs<T>()
         {
-            Owner.PopPopup();
+            return (T)_args;
         }
     }
 }
