@@ -2,9 +2,9 @@
 
 namespace UnityModules
 {
-    public static class CameraUtil
+    public static class CameraExtensions
     {
-        public static bool IsOutsideCameraViewport(Camera camera, Vector3 worldPos)
+        public static bool IsOutsideCameraViewport(this Camera camera, Vector3 worldPos)
         {
             Vector3 viewportPoint = camera.WorldToViewportPoint(worldPos);
             if (viewportPoint.z < 0f || viewportPoint.z > camera.farClipPlane)
