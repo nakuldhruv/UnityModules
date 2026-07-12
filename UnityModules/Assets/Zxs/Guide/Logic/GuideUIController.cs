@@ -19,7 +19,7 @@ namespace Zxs.Extension
             var currentStep = args.GuideCtrl.GetCurrentStep();
             if (currentStep.type == GuideStepType.Dialog)
             {
-                var dialogPrefab = Resources.Load<GuideDialogView>("GuideDialogView");
+                var dialogPrefab = Resources.Load<GuideDialogView>("Zxs/GuideDialogView");
                 UIManager.Instance.ShowView(dialogPrefab, ViewLayer.Guide, new GuideDialogView.Args(currentStep));
             }
         }

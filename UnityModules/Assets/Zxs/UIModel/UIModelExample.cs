@@ -13,7 +13,7 @@ namespace Zxs.Extension
             {
                 new UIModel()
                 {
-                    Name = "Model_Cube",
+                    Name = "Zxs/UIModel_Cube",
                     Rotation = new Vector3(0f, 30f, 0f),
                 }
             };

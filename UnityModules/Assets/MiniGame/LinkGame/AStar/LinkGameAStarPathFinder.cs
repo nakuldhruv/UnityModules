@@ -8,7 +8,7 @@ namespace UnityModules
     /// 为 LinkGame（连连看）设计的 A* 寻路器。
     /// 支持拐角数限制，并在搜索时对拐角施加惩罚，对直线给予奖励，以倾向选择更直的路径。
     /// </summary>
-    public class LinkGameAStarPathFinder
+    public class LinkGameAStarPathfinder
     {
         // -------------------- 配置参数 --------------------
         private static int _maxCornerCount;

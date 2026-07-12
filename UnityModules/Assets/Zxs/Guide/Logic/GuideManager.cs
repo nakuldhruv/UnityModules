@@ -59,7 +59,7 @@ namespace Zxs.Extension
 
         private void LoadGuideConfig()
         {
-            TextAsset textAsset = Resources.Load<TextAsset>("GuideConfig");
+            TextAsset textAsset = Resources.Load<TextAsset>("Zxs/GuideConfig");
             _guideConfig = JsonUtility.FromJson<GuideConfig>(textAsset.ToString());
         }
 
