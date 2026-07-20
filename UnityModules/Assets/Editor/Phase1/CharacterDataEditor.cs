@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace UnityModules.Editor
+namespace Nakul.Editor
 {
     [CustomEditor(typeof(CharacterData))]
     [CanEditMultipleObjects]

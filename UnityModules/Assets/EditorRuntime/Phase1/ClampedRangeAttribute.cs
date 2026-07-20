@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UnityModules.Editor
+namespace Nakul.Editor
 {
     public class ClampedRangeAttribute : PropertyAttribute
     {

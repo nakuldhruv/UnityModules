@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace UnityModules
+namespace Nakul.Core
 {
     public class SingletonMono<T> : MonoBehaviour where T : MonoBehaviour
     {

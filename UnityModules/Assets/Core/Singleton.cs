@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UnityModules
+namespace Nakul.Core
 {
     public class Singleton<T> where T : class, new()
     {

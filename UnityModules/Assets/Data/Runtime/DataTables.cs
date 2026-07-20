@@ -1,6 +1,6 @@
-﻿using UnityModules;
+﻿using Nakul.Core;
 
-namespace UnityModules
+namespace Nakul.Data
 {
     public class DataTables : SingletonMono<DataTables>
     {

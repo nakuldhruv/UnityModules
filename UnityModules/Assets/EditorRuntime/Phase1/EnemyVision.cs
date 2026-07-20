@@ -1,7 +1,6 @@
-﻿namespace UnityModules.Editor
+﻿namespace Nakul.Editor
 {
     public class EnemyVision
     {
-        
     }
 }

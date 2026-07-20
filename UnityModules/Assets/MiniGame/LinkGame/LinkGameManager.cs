@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace  UnityModules
+namespace Nakul.LinkGame
 {
     public class LinkGameManager : MonoBehaviour
     {

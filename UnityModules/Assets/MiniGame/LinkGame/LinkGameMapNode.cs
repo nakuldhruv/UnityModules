@@ -2,7 +2,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace UnityModules
+namespace Nakul.LinkGame
 {
     public class LinkGameMapNode : MonoBehaviour
     {

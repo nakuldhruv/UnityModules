@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UnityModules
+namespace Nakul.Extensions
 {
     public static class RectTransformExtensions
     {

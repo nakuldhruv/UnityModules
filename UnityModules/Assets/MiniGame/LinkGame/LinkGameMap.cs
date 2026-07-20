@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace UnityModules
+namespace Nakul.LinkGame
 {
     public class LinkGameMap : MonoBehaviour
     {

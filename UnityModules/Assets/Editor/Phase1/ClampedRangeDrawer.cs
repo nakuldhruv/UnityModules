@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace UnityModules.Editor
+namespace Nakul.Editor
 {
     [CustomPropertyDrawer(typeof(ClampedRangeAttribute))]
     public class ClampedRangeDrawer : PropertyDrawer

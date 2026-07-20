@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace UnityModules
+namespace Nakul.Extensions
 {
     public static class DateTimeExtensions
     {

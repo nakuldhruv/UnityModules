@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UnityModules
+namespace Nakul.Resource
 {
     public class ResourcesRequest<T>: CustomYieldInstruction where T: Object {
         private ResourceRequest _request;
