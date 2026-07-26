@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Zxs.UI
+namespace Zxs
 {
     [RequireComponent(typeof(CanvasGroup))]
     [RequireComponent(typeof(RectTransform))]

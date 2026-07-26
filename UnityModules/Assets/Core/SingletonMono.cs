@@ -20,7 +20,7 @@ namespace Nakul.Core
                         _instance = go.AddComponent<T>();
                     }
                 }
-                
+
                 return _instance;
             }
         }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Zxs.Extension
+namespace Zxs
 {
     public class UIModelManager : MonoBehaviour
     {

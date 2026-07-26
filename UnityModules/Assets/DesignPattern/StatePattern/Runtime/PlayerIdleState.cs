@@ -5,7 +5,7 @@ namespace Nakul.DesignPattern
     public class PlayerIdleState : State
     {
         private Player _player;
-        
+
         public PlayerIdleState(Player player)
         {
             _player = player;

@@ -1,4 +1,4 @@
-﻿namespace Zxs.UI
+﻿namespace Zxs
 {
     public class UIArgsBase
     {

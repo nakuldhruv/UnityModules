@@ -7,15 +7,15 @@ namespace JoJo.UI
 {
     public abstract class ViewBase : IDisposable
     {
-        public GameObject             DisplayObject;
-        public Transform              DisplayTransform;
-        public RectTransform          DisplayRectTransform;
-        public Action<string, object> UIEvent;
+        public GameObject DisplayObject { get; set; }
+        public Transform DisplayTransform { get; set; }
+        public RectTransform DisplayRectTransform { get; set; }
+        public Action<string, object> UIEvent { get; set; }
 
         public void SetDisplayObject(GameObject obj)
         {
-            DisplayObject        = obj;
-            DisplayTransform     = obj.transform;
+            DisplayObject = obj;
+            DisplayTransform = obj.transform;
             DisplayRectTransform = obj.GetComponent<RectTransform>();
             ParseComponent();
             AddEvent();
@@ -61,7 +61,8 @@ namespace JoJo.UI
 
         protected void RegisterButtonEvent(Button button, UnityAction action) => button.onClick.AddListener(action);
 
-        protected void UnRegisterButtonEvent(Button button, UnityAction action) => button.onClick.RemoveListener(action);
+        protected void UnRegisterButtonEvent(Button button, UnityAction action) =>
+            button.onClick.RemoveListener(action);
 
         protected abstract void ParseComponent();
 
@@ -77,10 +78,10 @@ namespace JoJo.UI
         {
             RemoveEvent();
             UnityEngine.Object.DestroyImmediate(DisplayObject);
-            DisplayObject        = null;
-            DisplayTransform     = null;
+            DisplayObject = null;
+            DisplayTransform = null;
             DisplayRectTransform = null;
-            UIEvent              = null;
+            UIEvent = null;
         }
     }
 }

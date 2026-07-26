@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Zxs.Extension
+namespace Zxs
 {
     public class InfiniteScrollRectItemView : MonoBehaviour
     {

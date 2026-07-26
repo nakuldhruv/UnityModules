@@ -1,10 +1,8 @@
-using System;
+using Nakul.Core;
 
-namespace Zxs.Event
+namespace Zxs
 {
-    public class GlobalSignalBus
+    public class GlobalSignalBus : Singleton<SignalBus>
     {
-        private static readonly Lazy<SignalBus> _instance = new(() => new SignalBus());
-        public static SignalBus Instance => _instance.Value;
     }
 }

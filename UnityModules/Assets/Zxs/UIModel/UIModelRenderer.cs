@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using Nakul.Utils;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Zxs.Extension
+namespace Zxs
 {
-    [RequireComponent(typeof(UIScreenAdapter))]
+    [RequireComponent(typeof(AutoScreenSizeUI))]
     public class UIModelRenderer : MonoBehaviour
     {
         public RawImage RawImage;

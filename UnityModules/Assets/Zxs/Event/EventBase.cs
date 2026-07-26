@@ -1,4 +1,4 @@
-﻿namespace Zxs.Event
+﻿namespace Zxs
 {
     public class EventBase
     {

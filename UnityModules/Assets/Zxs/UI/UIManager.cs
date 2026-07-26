@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Nakul.Core;
 using UnityEngine;
 
-namespace Zxs.UI
+namespace Zxs
 {
     public interface IViewCloser
     {

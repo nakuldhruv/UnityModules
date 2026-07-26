@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Zxs.Event
+namespace Zxs
 {
     public record PlayerDiedEvent; // 玩家死亡
     public record PlayerBornEvent; // 玩家出生

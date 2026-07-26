@@ -11,14 +11,14 @@ namespace Nakul.DSA
 
         public List<Vector2Int> obstacles;
 
-        public PathfindingNode   nodePrefab;
+        public PathfindingNode nodePrefab;
         public Transform nodeParent;
 
-        private bool[,]    _map;
+        private bool[,] _map;
         private PathfindingNode[,] _nodeMap;
 
-        private Queue<PathfindingNode>   _searchQueue = new Queue<PathfindingNode>();
-        private HashSet<PathfindingNode> _visited     = new HashSet<PathfindingNode>();
+        private Queue<PathfindingNode> _searchQueue = new Queue<PathfindingNode>();
+        private HashSet<PathfindingNode> _visited = new HashSet<PathfindingNode>();
 
         private List<PathfindingNode> _neighborsBuffer = new List<PathfindingNode>();
 
@@ -32,18 +32,18 @@ namespace Nakul.DSA
 
         private void Awake()
         {
-            _map     = new bool[mapWidth, mapHeight];
+            _map = new bool[mapWidth, mapHeight];
             _nodeMap = new PathfindingNode[mapWidth, mapHeight];
 
             for (int i = 0; i < mapHeight; i++) // 从左下角（lower left）开始，按行从左向右平铺，当前行铺满后向上移动一行。
             {
                 for (int j = 0; j < mapWidth; j++)
                 {
-                    PathfindingNode    node         = Instantiate(nodePrefab, Vector3.zero, Quaternion.identity, nodeParent);
+                    PathfindingNode node = Instantiate(nodePrefab, Vector3.zero, Quaternion.identity, nodeParent);
                     Vector2Int nodePosition = new Vector2Int(j, i);
-                    bool       isWalkable   = !obstacles.Contains(new Vector2Int(j, i));
+                    bool isWalkable = !obstacles.Contains(new Vector2Int(j, i));
                     node.SetData(nodePosition, isWalkable);
-                    _map[j, i]     = isWalkable;
+                    _map[j, i] = isWalkable;
                     _nodeMap[j, i] = node;
                 }
             }
@@ -54,9 +54,9 @@ namespace Nakul.DSA
         private IEnumerator FindPathCoroutine()
         {
             var startNode = _nodeMap[2, 6];
-            var endNode   = _nodeMap[6, 2];
+            var endNode = _nodeMap[6, 2];
 
-            if (!startNode.IsWalkable            || !endNode.IsWalkable ||
+            if (!startNode.IsWalkable || !endNode.IsWalkable ||
                 !IsInsideMap(startNode.Position) || !IsInsideMap(endNode.Position))
             {
                 Debug.LogError("无效起点和终点。");
@@ -116,7 +116,7 @@ namespace Nakul.DSA
             foreach (var direction in _directions)
             {
                 Vector2Int neighborPos = node.Position + direction;
-                if (IsInsideMap(neighborPos) && 
+                if (IsInsideMap(neighborPos) &&
                     !_visited.Contains(_nodeMap[neighborPos.x, neighborPos.y]) &&
                     _nodeMap[neighborPos.x, neighborPos.y].IsWalkable)
                 {

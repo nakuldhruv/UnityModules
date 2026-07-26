@@ -12,17 +12,17 @@ namespace Nakul.Utils
             byte[] keyBytes = Encoding.UTF8.GetBytes(key);
             byte[] ivBytes = Encoding.UTF8.GetBytes(iv);
             byte[] plainBytes = Encoding.UTF8.GetBytes(plainText);
-            
+
             byte[] cipherBytes = EncryptBytes(plainBytes, keyBytes, ivBytes);
             return Convert.ToBase64String(cipherBytes);
         }
 
         public static string DecryptString(string cipherText, string key, string iv)
         {
-            byte[] keyBytes   = Encoding.UTF8.GetBytes(key);
-            byte[] ivBytes    = Encoding.UTF8.GetBytes(iv);
+            byte[] keyBytes = Encoding.UTF8.GetBytes(key);
+            byte[] ivBytes = Encoding.UTF8.GetBytes(iv);
             byte[] plainBytes = Convert.FromBase64String(cipherText);
-            
+
             byte[] cipherBytes = DecryptBytes(plainBytes, keyBytes, ivBytes);
             return Encoding.UTF8.GetString(cipherBytes);
         }
@@ -31,7 +31,7 @@ namespace Nakul.Utils
         {
             ValidateKeyAndIv(keyBytes, ivBytes);
 
-            using (Aes  aes = Aes.Create())
+            using (Aes aes = Aes.Create())
             {
                 aes.Key = keyBytes;
                 aes.IV = ivBytes;
@@ -47,9 +47,9 @@ namespace Nakul.Utils
                             cs.Write(plainBytes, 0, plainBytes.Length);
                             cs.FlushFinalBlock();
                         }
-                        
+
                         return ms.ToArray();
-                    }   
+                    }
                 }
             }
         }
@@ -57,12 +57,12 @@ namespace Nakul.Utils
         public static byte[] DecryptBytes(byte[] cipherBytes, byte[] keyBytes, byte[] ivBytes)
         {
             ValidateKeyAndIv(keyBytes, ivBytes);
-            
-            using (Aes  aes = Aes.Create())
+
+            using (Aes aes = Aes.Create())
             {
-                aes.Key     = keyBytes;
-                aes.IV      = ivBytes;
-                aes.Mode    = CipherMode.CBC;
+                aes.Key = keyBytes;
+                aes.IV = ivBytes;
+                aes.Mode = CipherMode.CBC;
                 aes.Padding = PaddingMode.PKCS7;
 
                 using (ICryptoTransform decryptor = aes.CreateDecryptor())
@@ -74,13 +74,13 @@ namespace Nakul.Utils
                             cs.Write(cipherBytes, 0, cipherBytes.Length);
                             cs.FlushFinalBlock();
                         }
-                        
+
                         return ms.ToArray();
-                    }   
+                    }
                 }
             }
         }
-        
+
         private static void ValidateKeyAndIv(byte[] keyBytes, byte[] ivBytes)
         {
             if (keyBytes == null || (keyBytes.Length != 16 && keyBytes.Length != 24 && keyBytes.Length != 32))

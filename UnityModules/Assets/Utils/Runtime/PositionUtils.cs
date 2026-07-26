@@ -5,7 +5,7 @@ namespace Nakul.Utils
     public static class PositionUtils
     {
         // 自定义精度阈值（1e-6），比 float.Epsilon 更符合实际计算误差
-        private const float k_PrecisionEpsilon = 1e-6f;
+        private const float PrecisionEpsilon = 1e-6f;
 
         /// <summary>
         /// 计算当前物体应处于的正确位置，使其与目标位置保持至少 radius 距离。
@@ -30,7 +30,7 @@ namespace Nakul.Utils
             }
 
             // 情况2：几乎完全重叠（或极端接近），使用随机位置逃逸
-            if (distance <= k_PrecisionEpsilon)
+            if (distance <= PrecisionEpsilon)
             {
                 Vector3 randomPos = GetRandomPositionNearby(targetPos, radius, radius);
                 // 保留原始 Y 轴高度，防止角色掉到地上
@@ -41,7 +41,7 @@ namespace Nakul.Utils
             // 情况3：距离在 (0, radius) 之间，沿径向推离到边界
             Vector3 direction = (posXZ - targetXZ).normalized;
             Vector3 newPos = targetPos + direction * radius;
-            
+
             // 保留原始 Y 轴高度
             newPos.y = currentPos.y;
             return newPos;

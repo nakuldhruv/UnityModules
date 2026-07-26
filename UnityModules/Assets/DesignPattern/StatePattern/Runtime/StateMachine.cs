@@ -16,7 +16,7 @@
             _currentState = newState;
             _currentState?.Enter();
         }
-        
+
         public void Update()
         {
             _currentState?.Update();

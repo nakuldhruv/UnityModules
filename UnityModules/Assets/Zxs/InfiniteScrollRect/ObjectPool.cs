@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Zxs.Extension
+namespace Zxs
 {
     public class ObjectPool<T> where T : MonoBehaviour
     {

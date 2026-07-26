@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Zxs.Event
+namespace Zxs
 {
     public class SignalBus
     {
