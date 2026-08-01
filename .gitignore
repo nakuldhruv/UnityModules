@@ -1,6 +1,7 @@
 .idea/
 .vs/
 .vsconfig
+.vscode/
 
 *.csproj
 *.sln

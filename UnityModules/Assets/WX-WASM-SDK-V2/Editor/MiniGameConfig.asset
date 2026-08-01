@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MiniGameConfig
   m_EditorClassIdentifier: 
   ProjectConf:
-    projectName: SdkTest
+    projectName: "\u8FDE\u8FDE\u5192\u9669"
     Appid: wx815cd00d1df25235
     CDN: 
     assetLoadType: 1

@@ -4,12 +4,12 @@ namespace Nakul.Math
 {
     public class Player3D : MonoBehaviour
     {
-        [Header("移动参数")] [SerializeField] private float _moveSpeed     = 5f;
-        [SerializeField]                  private float _rotationSpeed = 2f;
-        [SerializeField]                  private float _gravityScale  = 1f; // 重力倍数（默认1）
+        [SerializeField] private float _moveSpeed = 5f;
+        [SerializeField] private float _rotationSpeed = 2f;
+        [SerializeField] private float _gravityScale = 1f; // 重力倍数（默认1）
 
         private Rigidbody _rb;
-        private float     _yaw;
+        private float _yaw;
 
         private void Start()
         {
@@ -25,7 +25,7 @@ namespace Nakul.Math
 
             // 锁定鼠标（提升体验）
             Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible   = false;
+            Cursor.visible = false;
         }
 
         private void Update()
@@ -41,7 +41,7 @@ namespace Nakul.Math
         {
             // 获取 WASD 输入
             float horizontal = Input.GetAxis("Horizontal");
-            float vertical   = Input.GetAxis("Vertical");
+            float vertical = Input.GetAxis("Vertical");
 
             // 计算移动方向（基于角色的前向和右向）
             Vector3 moveDirection = (transform.right * horizontal + transform.forward * vertical).normalized;
