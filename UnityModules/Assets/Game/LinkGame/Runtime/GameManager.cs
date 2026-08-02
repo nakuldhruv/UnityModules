@@ -30,7 +30,12 @@ namespace Nakul.LinkGame
         [SerializeField] private Text _totalScoreText;
 
         [SerializeField] private AudioClip _clickSound;
+        [SerializeField] private AudioClip _matchSound;
         [SerializeField] private AudioSource _audioSource;
+        [SerializeField] private AudioClip _bgmClip;
+        [SerializeField] private AudioSource _bgmSource;
+
+
 
 
         // 积分配置
@@ -92,8 +97,10 @@ namespace Nakul.LinkGame
         {
             LoadLevel();
             LoadTotalScore();
+            PlayBgm();
             StartGame();
         }
+
 
 
         private void Update()
@@ -183,7 +190,8 @@ namespace Nakul.LinkGame
                 return;
             }
 
-            var types = NodeTypeHelper.GeneratePairedTypes(total);
+            var types = NodeTypeHelper.GeneratePairedTypes(total, GetTypeCountForLevel());
+
             _pathfinding = new LinkPathfinding();
             _nodeMap = new Node[_mapWidth, _mapHeight];
             _remainingCount = total;
@@ -412,7 +420,9 @@ namespace Nakul.LinkGame
             _isBusy = true;
 
             yield return StartCoroutine(PlayLinkLineAnimation(path));
+            PlayMatchSound();
             yield return StartCoroutine(PlayClearAnimation(first, second));
+
 
             _isBusy = false;
             _clearRoutine = null;
@@ -611,6 +621,17 @@ namespace Nakul.LinkGame
             }
         }
 
+        /// <summary>
+        /// 根据当前关卡计算本关使用的图案种类数。
+        /// 前几关类型少、容易匹配，随关卡逐渐增多，最多 12 种。
+        /// </summary>
+        private int GetTypeCountForLevel()
+        {
+            // 第 1 关 4 种，之后每 2 关增加 1 种，封顶 12 种
+            return Mathf.Clamp(4 + (_currentLevel - 1) / 2, 4, 12);
+        }
+
+
         /// <summary>从 PlayerPrefs 读取累计总分，默认 0。</summary>
         private void LoadTotalScore()
         {
@@ -641,7 +662,6 @@ namespace Nakul.LinkGame
 
 
         /// <summary>播放点击音效。</summary>
-
         private void PlayClickSound()
         {
             if (_clickSound == null)
@@ -655,6 +675,22 @@ namespace Nakul.LinkGame
                 _audioSource.PlayOneShot(_clickSound);
             }
         }
+
+        /// <summary>播放消除音效。</summary>
+        private void PlayMatchSound()
+        {
+            if (_matchSound == null)
+            {
+                return;
+            }
+
+            EnsureAudioSource();
+            if (_audioSource != null)
+            {
+                _audioSource.PlayOneShot(_matchSound);
+            }
+        }
+
 
         /// <summary>确保存在可用的 AudioSource，未指定时自动挂载。</summary>
         private void EnsureAudioSource()
@@ -671,6 +707,50 @@ namespace Nakul.LinkGame
                 _audioSource.playOnAwake = false;
             }
         }
+
+        /// <summary>播放背景音乐（循环）。</summary>
+        private void PlayBgm()
+        {
+            if (_bgmClip == null)
+            {
+                return;
+            }
+
+            EnsureBgmSource();
+            if (_bgmSource == null)
+            {
+                return;
+            }
+
+            if (_bgmSource.clip != _bgmClip)
+            {
+                _bgmSource.clip = _bgmClip;
+            }
+
+            _bgmSource.loop = true;
+            _bgmSource.playOnAwake = false;
+            if (!_bgmSource.isPlaying)
+            {
+                _bgmSource.Play();
+            }
+        }
+
+        /// <summary>确保存在可用的背景音乐 AudioSource，未指定时自动挂载。</summary>
+        private void EnsureBgmSource()
+        {
+            if (_bgmSource != null)
+            {
+                return;
+            }
+
+            _bgmSource = GetComponent<AudioSource>();
+            if (_bgmSource == null)
+            {
+                _bgmSource = gameObject.AddComponent<AudioSource>();
+                _bgmSource.playOnAwake = false;
+            }
+        }
+
 
         private void ClearNode(Node node)
         {

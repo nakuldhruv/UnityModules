@@ -26,11 +26,30 @@ namespace Nakul.LinkGame
 
         public static NodeType GetRandomType()
         {
-            int randomIndex = UnityEngine.Random.Range(0, ValidNodeTypes.Length);
+            return GetRandomType(ValidNodeTypes.Length);
+        }
+
+        /// <summary>
+        /// 从指定数量的类型池中随机取一种类型。
+        /// typeCount 越小，可用的图案越少，匹配越容易。
+        /// </summary>
+        public static NodeType GetRandomType(int typeCount)
+        {
+            int count = Mathf.Clamp(typeCount, 1, ValidNodeTypes.Length);
+            int randomIndex = UnityEngine.Random.Range(0, count);
             return ValidNodeTypes[randomIndex];
         }
 
         public static List<NodeType> GeneratePairedTypes(int totalCount)
+        {
+            return GeneratePairedTypes(totalCount, ValidNodeTypes.Length);
+        }
+
+        /// <summary>
+        /// 生成成对的图案列表，仅使用前 typeCount 种图案。
+        /// 用于按关卡控制难度：前几关类型少、容易匹配，随关卡逐渐增多。
+        /// </summary>
+        public static List<NodeType> GeneratePairedTypes(int totalCount, int typeCount)
         {
             if (totalCount % 2 != 0)
             {
@@ -42,7 +61,7 @@ namespace Nakul.LinkGame
 
             for (int i = 0; i < pairCount; i++)
             {
-                NodeType randomType = GetRandomType();
+                NodeType randomType = GetRandomType(typeCount);
                 typesList.Add(randomType);
                 typesList.Add(randomType);
             }
@@ -51,6 +70,7 @@ namespace Nakul.LinkGame
 
             return typesList;
         }
+
 
         public static void Shuffle<T>(List<T> list)
         {
