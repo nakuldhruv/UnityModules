@@ -4,19 +4,19 @@ namespace Nakul.Core
 {
     public static class Debugger
     {
-        public static void Log(this object self, string message)
+        public static void Log(this object logger, string message)
         {
-            Debug.Log($"{nameof(self)}:{message}");
+            Debug.Log($"{logger.GetType().Name}:{message}");
         }
 
-        public static void Warning(this object self, string message)
+        public static void Warning(this object logger, string message)
         {
-            Debug.LogWarning($"{nameof(self)}:{message}");
+            Debug.LogWarning($"{logger.GetType().Name}:{message}");
         }
 
-        public static void Error(this object self, string message)
+        public static void Error(this object logger, string message)
         {
-            Debug.LogError($"{nameof(self)}:{message}");
+            Debug.LogError($"{logger.GetType().Name}:{message}");
         }
     }
 }
