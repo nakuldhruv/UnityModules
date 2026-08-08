@@ -10,10 +10,10 @@ namespace Nakul.Editor
         private List<GameObject> _prefabs        = new();
         private Vector2          _scrollPosition = Vector2.zero;
 
-        [MenuItem("Tools/PrefabScriptFinder")]
+        [MenuItem("Tools/预制体脚本查找工具")]
         public static void ShowWindow()
         {
-            GetWindow<PrefabScriptFinder>("PrefabScriptFinder");
+            GetWindow<PrefabScriptFinder>("预制体脚本查找工具");
         }
 
         private void OnGUI()
